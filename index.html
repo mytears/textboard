@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="텍스트 제작툴">
+    <meta property="og:url" content="https://devhome.co.kr/texteditor">
+    <meta property="og:image" content="images/thum.jpg">
+    <title></title>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="include/css/index.css">
+    
+<!--
+    <link rel="stylesheet" href="include/css/animate.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="include/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" type="text/css" />
+
+    <script src="include/js/lib/grapheme-splitter.min.js"></script>
+    <script src="include/js/lib/jquery.min.js"></script>
+    <script src="include/js/lib/jquery.ripples.min.js"></script>
+    <script src="include/js/lib/gsap.min.js"></script>
+    <script src="include/js/lib/TextPlugin.min.js"></script>
+    <script src="include/js/lib/html2canvas.js"></script>
+    <script src="include/js/lib/html-to-image.min.js"></script>
+    <script src="include/js/lib/dom-to-image.min.js"></script>
+    <script src="include/js/lib/FileSaver.min.js"></script>
+    <script src="include/js/lib/gif.js"></script>
+    <script src="include/js/lib/MotionPathPlugin.min.js"></script>
+    <script src="include/js/lib/wow.js"></script>
+    <script src="include/js/lib/sweetalert2.min.js"></script>
+<!--
+    
+    <script src="https://cdn.jsdelivr.net/npm/grapheme-splitter@1.0.4/dist/grapheme-splitter.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.ripples@0.6.3/dist/jquery.ripples.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@3.3.0/dist/dom-to-image-more.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/wowjs@1.1.3/dist/wow.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.js"></script>
+    
+-->
+    <!--    <script src="include/js/fonts.js"></script>-->
+    <script src="include/js/index.js"></script>
+</head>
+
+<body>
+    <div class="main_bg"></div>
+    <div class="main_png_txt_temp">
+        <div class="main_png_txt_font main_png_txt_value" title=""></div>
+        <div class="main_png_txt_font main_png_txt_bg1" title=""></div>
+        <div class="main_png_txt_font main_png_txt_bg2" title=""></div>
+    </div>
+    <div class="main_cont">
+        <div class="input_zone">
+            <!--            <textarea class="txt_string" type="text" id="id_input" value=""></textarea>-->
+            <!--            <div class="txt_string" id="id_txt_string" contenteditable="true"></div>-->
+            <input class="txt_string" type="text" id="id_input" value="">
+            <div class="emoji_btn_zone">
+                <div class="btn_add">♡</div>
+                <div class="btn_add">♥</div>
+                <div class="btn_add">ღ</div>
+                <div class="btn_add">ෆ</div>
+                <div class="btn_add">⁀</div>
+                <div class="btn_add">➷</div>
+                <div class="btn_add">➳</div>
+                <div class="btn_add">✿</div>
+                <div class="btn_add">❀</div>
+                <div class="btn_add">™</div>
+                <div class="btn_add">ʚ</div>
+                <div class="btn_add">ɞ</div>
+                <div class="btn_add">🩷</div>
+                <div class="btn_add">🧡</div>
+                <div class="btn_add">❤️</div>
+                <div class="btn_add">💕</div>
+                <div class="btn_add">💘</div>
+                <div class="btn_add">⭐</div>
+                <div class="btn_add">✨</div>
+                <div class="btn_add">⚡</div>
+                <!--
+                <div class="btn_add"><data>🩷</data></div>
+                <div class="btn_add"><data>🧡</data></div>
+                <div class="btn_add"><data>❤️</data></div>
+                <div class="btn_add"><data>💕</data></div>
+                <div class="btn_add"><data>💘</data></div>
+                <div class="btn_add"><data>⭐</data></div>
+                <div class="btn_add"><data>✨</data></div>
+                <div class="btn_add"><data>⚡</data></div>
+                -->
+            </div>
+            <div class="btn_convert default_btn">글자 적용</div>
+        </div>
+        <!--
+        
+        <div class="mode_zone">
+            <div class="txt_mode">현재 모드 : png 모드</div>
+            <div class="mode_btn_zone">
+                <div class="btn_mode default_btn" code="1">png 모드</div>
+                <div class="btn_mode default_btn btn_mode2" code="0">gif 모드</div>
+            </div>
+        </div>
+        
+-->
+<!--
+        <div class="main_svg_zone" style="display: none;">
+        </div>
+-->
+        <!--
+        <div class="main_svg_zone">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1195.01" height="375">
+            <defs>
+                <linearGradient id="textGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#f7ac43;" />
+                    <stop offset="100%" style="stop-color:#ffffff;" />
+                </linearGradient>
+            </defs>
+            <style>
+                @font-face {
+                    font-family: 'ByeolbichhaneulB';
+                    src: url('/data/fonts/ByeolbichhaneulB.json') format('woff');
+                }
+                text {
+                    font-family: 'ByeolbichhaneulB', sans-serif;
+                }
+            </style>
+            <text x="50%" y="50%" font-size="150px" 
+                text-anchor="middle" dominant-baseline="middle"
+                stroke="#000000" stroke-width="7" fill="url(#textGradient)">
+                테스트용문자열
+            </text>
+        </svg>
+        </div>
+-->
+<!--
+        <div class="main_gif_zone" style="display: none;">
+            <div class="main_txt"></div>
+            <div class="main_txt_temp" style="display:none;"></div>
+            <div class="color_zone">
+                <input type='color' name='color0' id="id_color_0" code="0" value="#000000" />
+                <label for="id_color_0">홀수 글자 색상</label>
+                <input type='color' name='color1' id="id_color_1" code="1" value="#000000" />
+                <label for="id_color_1">짝수 글자 색상</label>
+                <input type='color' name='color1' id="id_color_2" code="2" value="#000000" />
+                <label for="id_color_1">테두리 색상</label>
+            </div>
+        </div>
+-->
+        <div class="main_png_zone">
+            <div class="main_png_txt">
+                <div class='ticker ticker_1'></div>
+<!--                <div class='ticker ticker_2' id='id_ticker_2'></div>-->
+<!--
+                <div class="main_png_txt_font main_png_txt_value" title=""></div>
+
+                <div class="main_png_txt_font main_png_txt_bg1" title=""></div>
+                <div class="main_png_txt_font main_png_txt_bg2" title=""></div>
+-->
+            </div>
+<!--
+            <div class="color_zone">
+                <input type='color' name='color3' id="id_color_3" code="3" value="#000000" />
+                <label for="id_color_3">색상 1</label>
+                <input type='color' name='color4' id="id_color_4" code="4" value="#000000" />
+                <label for="id_color_4">색상 2</label>
+                <input type='color' name='color5' id="id_color_5" code="5" value="#000000" />
+                <label for="id_color_5">테두리</label>
+                <div class="stroke_reset" onclick="javascript:onClickStrokeReset()">
+                    <input type='color' name='color6' id="id_color_6" code="6" value="#000000" style="pointer-events: none;" />
+                    <label>테두리 초기화</label>
+                </div>
+            </div>
+-->
+        </div>
+        <div class="btns_zone">
+            <!--
+            
+            <div class="font_btn">CookieBlack</div>
+            <div class="font_btn">esamanruBold</div>
+            <div class="font_btn">Katuri</div>
+            <div class="font_btn">KCC</div>
+            <div class="font_btn">KorailBold</div>
+            <div class="font_btn">netmarbleB</div>
+            <div class="font_btn">ONE_Mobile</div>
+            <div class="font_btn">SDSamlipBasic</div>
+            <div class="font_btn">Sokcho</div>
+            <div class="font_btn">TTTogether</div>
+            <div class="font_btn">DNF</div>
+            <div class="font_btn">Gumi</div>
+            <div class="font_btn">Byeolbich</div>
+            <div class="font_btn">Dunggeunmiso</div>
+            <div class="font_btn">Jalnan</div>
+            <div class="font_btn">Maple</div>
+            <div class="font_btn">Aggro</div>
+            <div class="font_btn">YClover</div>
+            <div class="font_btn">YOnepick</div>
+            
+-->
+        </div>
+        <div class="download_zone">
+            <div class="btn_download default_btn">저장</div>
+        </div>
+        <!--
+        <div class="finish_zone">
+            <div class="txt_finish_title"></div>
+            <div class="txt_finish_desc"></div>
+        </div>
+-->
+    </div>
+
+    <!--    <div id="preview" style="border: 1px solid black; width: 200px; height: 200px; overflow: hidden;"></div>-->
+</body></html>
+<script language="javascript">
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(setInit, 10);
+    });
+
+</script>

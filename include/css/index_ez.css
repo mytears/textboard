@@ -1,0 +1,443 @@
+.main_cont {
+    position: relative;
+    width: 3840px;
+    height: 2160px;
+    overflow: hidden;
+}
+
+body {
+    background-color: rgba(255, 255, 255, 0);
+    background: #000000;
+}
+
+
+
+.notice_main .notice_box {
+    position: absolute;
+    /*    transition: opacity 1s ease;*/
+}
+
+.notice_main .notice_box img {
+    width: 100%;
+    height: 100%;
+}
+
+.notice_main .notice_box video {
+    width: 100%;
+    height: 100%;
+}
+
+.notice_frame {
+    position: absolute;
+    background-color: #000000;
+    overflow: hidden;
+    /*    background-color: transparent;*/
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+video.full_size {
+    object-fit: fill;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+img.full_size {
+    object-fit: fill;
+}
+
+.time_main_box {
+    position: absolute;
+    width: 99%;
+    top: 1%;
+    left: 0.5%;
+    text-align: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    font-size: 4rem;
+    z-index: 99999999999;
+}
+
+.info {
+    width: 99%;
+    position: absolute;
+    bottom: 1%;
+    left: 0.5%;
+    color: white;
+    background-color: rgba(33, 66, 99, 0.7);
+    border-radius: 5px;
+    font-size: 3rem;
+    text-align: center;
+    z-index: 99;
+}
+
+.debug_cont {
+    position: absolute;
+    top: 0px;
+
+}
+
+.debug_cont .circle {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 2rem;
+    background-color: #FF0000;
+    opacity: 0.5;
+}
+
+
+.ticker_box {
+    position: absolute;
+    bottom: 0%;
+    width: 100%;
+    height: 15%;
+    color: white;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
+    font-size: 4rem;
+    z-index: 99999999999;
+}
+
+/*
+.ticker {
+    display: inline-block;
+    white-space: nowrap;
+}
+*/
+
+.web_cont {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.web_cont .click_blocker {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+iframe {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    overflow: hidden;
+}
+
+
+.widget_area {
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.time_cont {
+    position: absolute;
+    right: 0;
+    width: 10%;
+    height: 10%;
+    background-color: rgba(0, 0, 0, 0.5);
+    box-sizing: content-box;
+    color: #FFFFFF;
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.weather_cont {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 12%;
+    height: 10%;
+    background: #00000033;
+    right: 10%;
+    font-size: 25px;
+    overflow: hidden;
+}
+
+.weather_top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.weather_center {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.ico_wm {
+    width: 20vh;
+}
+
+.ico_wm img {
+    max-width: 100%;
+    height: auto;
+}
+
+#id_name {
+    width: 100%;
+    text-align: center;
+}
+
+#id_tmp {
+    font-weight: 400;
+    width: 50%;
+    text-align: center;
+}
+
+#id_sky {
+    font-weight: 700;
+    width: 100%;
+    text-align: center;
+    padding: 0 10px;
+}
+
+
+
+@keyframes ticker_anim {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        /* 한 줄 분량 만큼만 왼쪽으로 이동 */
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+
+@keyframes ticker_anim_2 {
+    0% {
+        transform: translate3d(100%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-200%, 0, 0);
+    }
+}
+
+.ticker_cont {
+    position: absolute;
+/*    position: relative;*/
+    bottom: 0%;
+    width: 100%;
+    overflow: hidden;
+    height: 10%;
+    background-color: rgba(0, 0, 0, 0.9);
+    box-sizing: content-box;
+    display: flex;
+}
+
+.ticker_cont.top {
+    top: 0%;
+    bottom: none;
+}
+
+.ticker_cont.bot {
+    top: none;
+    bottom: 0%;
+}
+
+.ticker_cont .ticker {
+    display: inline-block;
+    height: 100%;
+    line-height: 8rem;
+    white-space: nowrap;
+    will-change: transform;
+    box-sizing: content-box;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+/*    animation-name: ticker_anim;*/
+    animation-duration: 30s;
+    animation-delay: -30s;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 0; 
+    top: 0;
+}
+
+.ticker_cont .ticker__item {
+    display: inline-block;
+    padding: 0 8rem;
+}
+
+.debug_btn {
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    background-color: #FF000000;
+    bottom: 0;
+    right: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.debug_temp_btn {
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    background-color: #FF000000;
+    bottom: 0;
+    right: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.debug_temp_btn .d_btn {
+    width: 95%;
+    height: 8%;
+    border-radius: 8%;
+    background-color: #000000aa;
+    margin: 10px;
+    border: 0.5rem solid #000000;
+    font-size: 2.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.password_area {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #00000099;
+    bottom: 0;
+    left: 0;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.password_area .password_zone {
+    width: 50%;
+    height: 50%;
+    background-color: #FFFFFF;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.password_area .password_zone .result_txt {
+    width: 50%;
+    height: 5%;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.password_area .password_zone .password_txt {
+    width: 30%;
+    height: 10%;
+    border: 3px solid #000000;
+    font-size: 40px;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 30px;
+    padding-left: 30px;
+}
+
+.password_area .password_zone .btns_zone {
+    margin-top: 50px;
+    width: 50%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.password_area .password_zone .btn_num {
+    margin: 5px;
+    width: 30%;
+    height: 25%;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.password_area .password_zone .menu_zone {
+    margin-top: 25px;
+    width: 48%;
+    height: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+.password_area .password_zone .menu_zone .btn_close {
+    background-color: #FF000066;
+}
+
+
+.password_area .password_zone .menu_zone .btn_confirm {
+    background-color: #0000FF66;
+}
+
+.pdf_cont {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.pdf_view {
+    position: absolute;
+    z-index: 10;
+}
+
+.pdf_view.full_size {
+    width: 100%;
+    height:100%;
+}
+
+.pdf_view_temp {
+    position: absolute;
+    z-index: 9;
+    display: none;
+}

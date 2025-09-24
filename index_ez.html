@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="google" content="notranslate" />
+    <title>INFORMATION</title>
+
+    <link rel="stylesheet" href="include/css/index.css">
+    <link rel="stylesheet" href="include/css/common.css">
+    <link rel="stylesheet" href="include/css/weather.css">
+
+    <script src="include/js/lib/jquery-3.7.1.min.js"></script>
+    <script src="include/js/lib/pdf.min.js"></script>
+    <script src="include/js/lib/gsap.min.js"></script>
+    <script src="include/js/index.js"></script>
+    <script src="include/js/comm.js"></script>
+
+</head>
+
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+    <div class="main_cont">
+        <div class="cover">
+            <div class="loader"></div>
+        </div>
+        <div class="debug_temp_btn" style="display:none;">
+            <div class="d_btn" code="1">시작 5분 전</div>
+            <div class="d_btn" code="2">시작</div>
+            <div class="d_btn" code="3">1시간 후</div>
+            <div class="d_btn" code="4">종료</div>
+<!--            <div class="d_btn" code="5">RSS 갱신</div>-->
+        </div>
+        <div class="alert_area" style="display:none;">
+<!--            <div class="alert_txt">적용된 스케줄이 없습니다.<br>스케줄 관리 > 키오스크 분배를 확인해주세요.</div>-->
+            <div class="alert_img"><img src="images/easyCMS_standby_4k(1).png"></div>
+        </div>
+        <div class="password_area" style="display:none;">
+            <div class="password_zone">
+                <div class="password_txt"></div>
+                <div class="btns_zone">
+                    <button class="btn_num">0</button>
+                    <button class="btn_num">1</button>
+                    <button class="btn_num">2</button>
+                    <button class="btn_num">3</button>
+                    <button class="btn_num">4</button>
+                    <button class="btn_num">5</button>
+                    <button class="btn_num">6</button>
+                    <button class="btn_num">7</button>
+                    <button class="btn_num">8</button>
+                    <button class="btn_num"></button>
+                    <button class="btn_num">9</button>
+                    <button class="btn_num btn_back">←</button>
+                </div>
+                <div class="menu_zone">
+                    <button class="btn_num btn_confirm">확인</button>
+                    <button class="btn_num btn_close">닫기</button>
+                </div>
+                <div class="result_txt"></div>
+            </div>
+        </div>
+        <div class="time_main_box" style="display:none;"></div>
+        <div class="widget_area">
+            <div class="weather_main rt">
+                <div class="inner">
+                    <div class="weather_box">
+                        <div class="icon"><img src=""></div>
+                        <div class="temp"></div>
+                        <div class="title"></div>
+                    </div>
+                    <div class="time_box">
+                        <div class="txt_hour"></div>
+                        <div class="txt_day"></div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <div class="weather_cont" style="display:none;">
+                <div class="weather_top">
+                    <div id="id_name">서울특별시</div>
+                </div>
+                <div class="weather_center">
+                    <div class="ico_wm"><img id="id_weather_img" src="images/weather/DB03_N_B.svg" /></div>
+                    <b id="id_tmp">17˚</b>
+                    <p id="id_sky">구름많음</p>
+                </div>
+            </div>
+            <div class="time_cont" style="display:none;">
+                <div class="date_txt"></div>
+                <div class="time_txt"></div>
+            </div>
+            -->
+            <div class='ticker_cont' style="display:none;">
+                <div class='ticker' id='id_ticker'></div>
+                <div class='ticker' id='id_ticker_2'></div>
+            </div>
+        </div>
+        <div class="list_area">
+            <div id="id_page_notice_list" class="notice_main">
+                <div id="id_notice_box_01" class="notice_box" style="display:none;">
+                </div>
+                <div id="id_notice_box_02" class="notice_box" style="display:none;">
+                </div>
+            </div>
+            <div id="id_page_s_notice_list" class="notice_main" style="display:none;">
+                <div id="id_s_notice_box_01" class="notice_box" style="display:none;">
+                </div>
+                <div id="id_s_notice_box_02" class="notice_box" style="display:none;">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var MAINPARENTCUSTOMCODE = true;
+
+    window.addEventListener('DOMContentLoaded', function() {
+        setTimeout(setInit, 100);
+    });
+
+</script>
