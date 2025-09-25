@@ -13,8 +13,7 @@
 
     <link rel="stylesheet" href="include/css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css"
-        type="text/css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css" type="text/css" />
 
     <script src="include/js/lib/grapheme-splitter.min.js"></script>
     <script src="include/js/lib/jquery.min.js"></script>
@@ -36,8 +35,7 @@
     <div class="main_bg"></div>
     <div class="main_cont">
         <div class="input_zone">
-            <div class="txt_string" id="id_input" contenteditable="true"></div>
-
+            <input class="txt_string" type="text" id="id_input" value="">
             <div class="emoji_btn_zone">
                 <div class="btn_add">♡</div>
                 <div class="btn_add">♥</div>
@@ -69,12 +67,12 @@
             </div>
         </div>
         <div class="color_zone">
-            <input type='color' name='color3' id="id_color_3" value="#000000" />
+            <input type='color' name='color3' id="id_color_3" code="3" value="#000000" />
             <label for="id_color_3">배경 색상</label>
-            <input type='color' name='color4' id="id_color_4" value="#FFFFFF" />
-            <label for="id_color_4">선택 글자</label>
-            <input type='color' name='color5' id="id_color_5" value="#FFFFFF" />
-            <label for="id_color_5">전체 글자</label>
+            <input type='color' name='color4' id="id_color_4" code="4" value="#000000" />
+            <label for="id_color_4">글자 색상</label>
+            <input type='color' name='color5' id="id_color_5" code="5" value="#000000" />
+            <label for="id_color_5">전체 글자 색상</label>
         </div>
         <div class="btns_zone">
         </div>
@@ -84,11 +82,10 @@
         </div>
     </div>
 
-</body>
-
-</html>
+</body></html>
 <script language="javascript">
-    window.addEventListener('DOMContentLoaded', function () {
+    window.addEventListener('DOMContentLoaded', function() {
         setTimeout(setInit, 10);
     });
+
 </script>

@@ -7627,7 +7627,7 @@
                 // eslint-disable-next-line no-console
                 if (typeof window !== 'undefined' && window.console && typeof console.debug === 'function') {
                     // eslint-disable-next-line no-console
-                    console.debug.apply(console, __spreadArray([this.id, this.getTime() + "ms"], args));
+                    //console.debug.apply(console, __spreadArray([this.id, this.getTime() + "ms"], args));
                 }
                 else {
                     this.info.apply(this, args);

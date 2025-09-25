@@ -19,10 +19,6 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-[contenteditable]:focus {
-    outline: none;
-}
-
 .main_bg {
     width: 100vw;
     height: 100vh;
@@ -69,35 +65,18 @@ img {
     flex-direction: column;
 }
 
-.txt_string {
+.txt_string{
+    background-color: #666666;
+    color: #FFFFFF;
+}
+
+.input_zone input {
     width: 100%;
-    min-height: 50px;
-    font-size: clamp(15px, 10vw, 20px);
+    height: 50px;
+    font-size: clamp(15px, 10vw, 30px);
     text-align: center;
     margin: 5px 0px;
     font-family: CookieRunBlack;
-    background-color: #666666;
-    color: #FFFFFF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 5px;
-    box-sizing: border-box;
-    -moz-user-select: text;
-    -webkit-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
-    cursor: text;
-}
-
-/* [추가된 코드] =================================
-이 코드가 문제를 해결합니다. 
-.txt_string 내부 또는 ticker 내부에 font 태그가 생성되더라도
-부모의 font-family를 그대로 상속받도록 강제합니다.
-==============================================
-*/
-.txt_string font, .ticker__item font {
-    font-family: inherit !important;
 }
 
 .emoji_btn_zone {
@@ -136,7 +115,7 @@ img {
 
 .main_png_zone {
     width: 100%;
-    height: 80px;
+    height: 8%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -186,6 +165,7 @@ img {
     align-items: center;
     border: 1px solid #000000;
     box-sizing: border-box;
+    /*    margin: 5px;*/
     background: #DCB8A6;
 }
 
@@ -206,10 +186,13 @@ img {
     padding: 0 !important;
 }
 
+
+
+
 .main_png_txt {
     width: 100%;
-    height: 200px;
     overflow: hidden;
+    background-color: rgba(0, 0, 0, 1);
     box-sizing: content-box;
     display: flex;
 }
@@ -223,6 +206,7 @@ img {
     align-items: center;
     justify-content: center;
     animation-name: flow;
+    animation-duration: 20s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
@@ -235,14 +219,18 @@ img {
     color: #FFFFFF;
 }
 
+/* 왼쪽으로 흐르는 애니메이션 정의 */
 @keyframes flow {
     0% {
         transform: translateX(0);
     }
+
     100% {
+        /* 자기 자신의 너비만큼 왼쪽으로 이동 */
         transform: translateX(-100%);
     }
 }
+
 
 .color_zone {
     width: 100%;
@@ -263,7 +251,9 @@ input[type='color'] {
     height: 100%;
     display: flex;
     align-items: center;
+    /* 글자 수직 중앙 정렬 */
     justify-content: center;
+    /* 필요 시 수평 정렬 */
     font-size: clamp(5px, 5vw, 17px);
     font-family: 'Noto';
 }
