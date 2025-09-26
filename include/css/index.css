@@ -32,7 +32,7 @@
 }
 
 .main_cont {
-    width:1920px;
+    width:1280px;
     height: 100vh;
     background-color: #FFFFFF;
     position: relative;
@@ -156,7 +156,7 @@ img {
 
 .main_png_zone {
     width: 100%;
-    height: 90px;
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -249,7 +249,7 @@ img {
 
 .main_png_txt {
     width: 100%;
-    height: 90px;
+    height: 65px;
     overflow: hidden;
     box-sizing: content-box;
     display: flex;
@@ -271,7 +271,7 @@ img {
 
 .main_png_txt .ticker__item {
     font-family: CookieRunBlack;
-    font-size: 2.5rem;
+    font-size: 2rem;
     display: inline-block;
     padding: 0 30px;
     color: #FFFFFF;
