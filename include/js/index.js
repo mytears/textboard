@@ -227,8 +227,8 @@ function onClickDownloadBtn() {
     });
 
     // [핵심 수정] 캡처할 길이를 'ticker__item' 하나 만큼으로 한정
-    const captureDistance = $tickers.first().find('.ticker__item').first().width();
-
+    const captureDistance = $tickers.first().find('.ticker__item').first().width() + parseInt($tickers.first().find('.ticker__item').first().css('padding-left'))*2;
+    
     // [핵심 수정] 그 길이에 맞는 시간과 프레임 수를 다시 계산
     const captureDuration = (captureDistance / PIXELS_PER_SECOND) * 1000; // ms 단위
     const totalFrames = Math.round((captureDuration / 1000) * FPS);
