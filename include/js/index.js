@@ -220,7 +220,7 @@ function onClickDownloadBtn() {
 
     gif = new GIF({
         workers: 2,
-        quality: 999,
+        quality: 24,
         width: captureWidth, // 계산된 너비 적용
         height: captureHeight, // 계산된 높이 적용
         workerScript: 'include/js/lib/gif.worker.js'
