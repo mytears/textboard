@@ -1,3 +1,6 @@
+// [변경] 스크롤 속도를 전역 상수로 정의하여 공유
+const PIXELS_PER_SECOND = 100; // 1초에 100픽셀 이동하는 속도
+
 // 전역 변수들 (기존과 동일)
 let isRecording = false;
 let framesAdded = 0;
@@ -16,27 +19,57 @@ let m_default_font_size = 0;
 let splitter = new GraphemeSplitter();
 let tickerTimeout1 = null;
 let tickerTimeout2 = null;
+let m_item_w = 640;
 
 function setInit() {
-    $(".btn_download").on("touchstart mousedown", function(e) { e.preventDefault(); onClickDownloadBtn(); });
-    $(".btn_convert").on("touchstart mousedown", function(e) { e.preventDefault(); onClickConvertBtn(this); });
-    $(".btn_add").on("touchstart mousedown", function(e) { e.preventDefault(); onClickAddBtn(this); });
-    $(".txt_string").on("focus", function(e) { e.preventDefault(); });
-    $(".txt_string").on("input paste", function(e) {});
-
-    $("#id_color_3").on("input", function(e) {
+    $(".btn_download").on("touchstart mousedown", function (e) {
         e.preventDefault();
-        $(".main_png_zone").css("background-color", $(this).val());
+        onClickDownloadBtn();
+    });
+    $(".btn_convert").on("touchstart mousedown", function (e) {
+        e.preventDefault();
+        onClickConvertBtn(this);
+    });
+    $(".btn_add").on("touchstart mousedown", function (e) {
+        e.preventDefault();
+        onClickAddBtn(this);
+    });
+    $(".btn_submit").on("touchstart mousedown", function (e) {
+        e.preventDefault();
+        onClickSubmitBtn(this);
+    });
+    $(".btn_back").on("touchstart mousedown", function (e) {
+        e.preventDefault();
+        onClickBackBtn(this);
+    });
+    $(".txt_string").on("focus", function (e) {
+        e.preventDefault();
+    });
+    $(".txt_string").on("input", function (e) {});
+    // [핵심 추가] paste 이벤트를 가로채서 순수 텍스트만 붙여넣도록 처리합니다.
+    $(".txt_string").on("paste", function (e) {
+        // 1. 기본 붙여넣기 동작(HTML 서식 포함)을 막습니다.
+        e.preventDefault();
+
+        // 2. 클립보드 데이터에서 순수 텍스트(text/plain) 정보만 추출합니다.
+        let text = (e.originalEvent || e).clipboardData.getData('text/plain');
+
+        // 3. 추출한 순수 텍스트를 현재 커서 위치에 삽입합니다.
+        document.execCommand('insertText', false, text);
+    });
+    $("#id_color_3").on("input", function (e) {
+        e.preventDefault();
+        $(".main_png_txt").css("background-color", $(this).val());
     });
 
-    $("#id_color_4").on("input", function(e) {
+    $("#id_color_4").on("input", function (e) {
         e.preventDefault();
         const selectedColor = $(this).val();
         $(".txt_string").focus();
         document.execCommand('foreColor', false, selectedColor);
     });
 
-    $("#id_color_5").on("input", function(e) {
+    $("#id_color_5").on("input", function (e) {
         e.preventDefault();
         const newColor = $(this).val();
         $(".ticker__item").css("color", newColor);
@@ -58,37 +91,31 @@ function setTicker() {
     if (tickerTimeout2) clearTimeout(tickerTimeout2);
 
     const $tickers = $(".ticker");
-    // 1. 애니메이션을 확실히 멈춤
     $tickers.css('animation', 'none');
 
     const contentHtml = $(".txt_string").html();
     let t_html = "<div class='ticker__item'>" + contentHtml + "</div>";
     $tickers.html(t_html);
 
-    tickerTimeout1 = setTimeout(function() {
+    tickerTimeout1 = setTimeout(function () {
         let itemWidth = $tickers.first().find('.ticker__item').first().width();
+        m_item_w = itemWidth;
         let containerWidth = $tickers.first().parent().width();
 
         if (itemWidth === 0) return;
 
         if (itemWidth < containerWidth) {
-            let repeatCount = Math.ceil(containerWidth / itemWidth) + 1;
+            let repeatCount = (Math.ceil(containerWidth / itemWidth) + 1)/2;
             let finalHtml = "";
             for (let i = 0; i < repeatCount; i++) {
                 finalHtml += t_html;
             }
             $tickers.html(finalHtml);
         }
-
-        const PIXELS_PER_SECOND = 100;
+        // [변경] 전역 상수로 정의된 속도 사용
         const finalTickerWidth = $(".ticker_1").width();
         const duration = finalTickerWidth / PIXELS_PER_SECOND;
-
-        // 2. 브라우저가 'animation: none' 상태를 인지하도록 강제 (리플로우)
         void $tickers[0].offsetWidth;
-
-        // 3. [핵심 수정] 계산된 duration을 포함하여 animation 단축 속성을 한 번에 설정
-        // 형식: animation: [name] [duration] [timing-function] [iteration-count];
         $tickers.css('animation', `flow ${duration}s linear infinite`);
 
     }, 10);
@@ -99,11 +126,11 @@ function setLoadFont() {
     $.ajax({
         url: _url,
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             m_font_list = data.fonts_list;
             setInitFont();
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error('컨텐츠 에러 발생:', status, error);
         },
     });
@@ -155,7 +182,6 @@ function setAddFont(_obj) {
         .catch(error => console.error("폰트 로드 실패:", error));
 }
 
-
 function onClickDownloadBtn() {
     if (isRecording) {
         Swal.fire({
@@ -173,59 +199,73 @@ function onClickDownloadBtn() {
 
     Swal.fire({
         title: "GIF 생성 시작",
-        text: "움직임을 캡처하는 중입니다.",
+        text: "움직임을 캡처하는 중입니다. 잠시 기다려 주세요.",
         icon: "info",
         showConfirmButton: false,
         allowOutsideClick: false,
-        target: ".main_cont",
-        didOpen: () => {
-            Swal.showLoading();
-        }
+        target: ".main_cont"
     });
+
+    const $tickerContainer = $(".main_png_txt");
+    const $tickers = $(".ticker");
+
+    // [핵심 수정 1] 화면의 해상도 비율(DPI)을 가져옵니다.
+    //const scale = window.devicePixelRatio || 1;
+    const scale = 1;
+    const FPS = 30;
+
+    // [핵심 수정 2] 해상도 비율을 반영하여 GIF와 캔버스의 최종 크기를 계산합니다.
+    const captureWidth = $tickerContainer.width() * scale;
+    const captureHeight = $tickerContainer.height() * scale;
 
     gif = new GIF({
         workers: 2,
-        quality: 10,
-        width: $('.main_png_zone').width(),
-        height: $('.main_png_zone').height(),
+        quality: 999,
+        width: captureWidth, // 계산된 너비 적용
+        height: captureHeight, // 계산된 높이 적용
         workerScript: 'include/js/lib/gif.worker.js'
     });
 
-    const $tickerContainer = $(".main_png_zone");
-    const $tickers = $(".ticker");
-    const animationDuration = parseFloat($tickers.first().css('animation-duration')) * 1000;
-    const FPS = 3;
-    const totalFrames = Math.round((animationDuration / 1000) * FPS);
+    // [핵심 수정] 캡처할 길이를 'ticker__item' 하나 만큼으로 한정
+    const captureDistance = $tickers.first().find('.ticker__item').first().width();
+
+    // [핵심 수정] 그 길이에 맞는 시간과 프레임 수를 다시 계산
+    const captureDuration = (captureDistance / PIXELS_PER_SECOND) * 1000; // ms 단위
+    const totalFrames = Math.round((captureDuration / 1000) * FPS);
     const frameInterval = 1000 / FPS;
     let currentFrame = 0;
 
     $tickers.css('animation', 'none');
+    const captureBgColor = $("#id_color_3").val();
 
     function captureFrame() {
-        if (currentFrame >= (totalFrames/3)) {
+        if (currentFrame >= totalFrames) {
             gif.render();
             return;
         }
 
         const progress = currentFrame / totalFrames;
-        const oneCycleWidth = $(".ticker_1").width();
-        const tx = -1 * oneCycleWidth * progress;
-        
+        // [핵심 수정] 이동 거리의 기준을 전체 너비가 아닌 captureDistance로 변경
+        const tx = -1 * captureDistance * progress;
+
         $tickers.css('transform', `translateX(${tx}px)`);
 
         requestAnimationFrame(() => {
             html2canvas($tickerContainer[0], {
-                backgroundColor: null,
+                backgroundColor: captureBgColor,
                 useCORS: true,
-            }).then(function(canvas) {
-                gif.addFrame(canvas, { delay: frameInterval, copy: true });
+                scale: scale // [핵심 수정 3] html2canvas에 해상도 비율(scale) 옵션을 전달합니다.
+            }).then(function (canvas) {
+                gif.addFrame(canvas, {
+                    delay: frameInterval,
+                    copy: true
+                });
                 framesAdded++;
                 currentFrame++;
 
                 Swal.update({
                     title: "GIF 생성 중",
-                    text: `프레임 캡처: ${framesAdded} / ${totalFrames}`,
-                    target: ".main_cont"
+                    text: `프레임 캡처: ${framesAdded} / ${totalFrames}`
                 });
 
                 captureFrame();
@@ -233,7 +273,7 @@ function onClickDownloadBtn() {
         });
     }
 
-    gif.on('finished', function(blob) {
+    gif.on('finished', function (blob) {
         saveAs(blob, 'ticker_animation.gif');
         Swal.fire({
             title: "GIF 생성 완료!",
@@ -247,11 +287,11 @@ function onClickDownloadBtn() {
         $tickers.css('animation', '');
     });
 
-    gif.on('progress', function(p) {
+    gif.on('progress', function (p) {
+        // [변경] '인코딩 중' 상태를 text로 업데이트
         Swal.update({
-            title: "GIF 인코딩 중",
-            text: `인코딩 진행률: ${Math.round(p * 100)}%`,
-            target: ".main_cont"
+            title: 'GIF 인코딩 중', // 인코딩 시에는 제목 변경
+            text: `진행률: ${Math.round(p * 100)}%`
         });
     });
 
@@ -261,4 +301,14 @@ function onClickDownloadBtn() {
 function onClickAddBtn(_obj) {
     $(".txt_string").focus();
     document.execCommand('insertHTML', false, $(_obj).text());
+}
+
+function onClickSubmitBtn(_obj) {
+    $(".start_zone").hide();
+    $(".final_zone").show();
+}
+
+function onClickBackBtn(_obj) {
+    $(".start_zone").show();
+    $(".final_zone").hide();
 }

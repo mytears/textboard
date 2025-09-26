@@ -13,8 +13,8 @@
 
     <link rel="stylesheet" href="include/css/index.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css"
-        type="text/css" />
+    <link rel="stylesheet" href="include/css/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="include/css/animate.min.css" rel="stylesheet" type="text/css" />
 
     <script src="include/js/lib/grapheme-splitter.min.js"></script>
     <script src="include/js/lib/jquery.min.js"></script>
@@ -35,58 +35,68 @@
 <body>
     <div class="main_bg"></div>
     <div class="main_cont">
-        <div class="input_zone">
-            <div class="txt_string" id="id_input" contenteditable="true"></div>
-
-            <div class="emoji_btn_zone">
-                <div class="btn_add">♡</div>
-                <div class="btn_add">♥</div>
-                <div class="btn_add">ღ</div>
-                <div class="btn_add">ෆ</div>
-                <div class="btn_add">⁀</div>
-                <div class="btn_add">➷</div>
-                <div class="btn_add">➳</div>
-                <div class="btn_add">✿</div>
-                <div class="btn_add">❀</div>
-                <div class="btn_add">™</div>
-                <div class="btn_add">ʚ</div>
-                <div class="btn_add">ɞ</div>
-                <div class="btn_add">🩷</div>
-                <div class="btn_add">🧡</div>
-                <div class="btn_add">❤️</div>
-                <div class="btn_add">💕</div>
-                <div class="btn_add">💘</div>
-                <div class="btn_add">⭐</div>
-                <div class="btn_add">✨</div>
-                <div class="btn_add">⚡</div>
+        <div class="start_zone">
+            <div class="input_zone">
+                <div class="txt_string" id="id_input" contenteditable="true"></div>
+                <div class="emoji_btn_zone">
+                    <div class="btn_add">♡</div>
+                    <div class="btn_add">♥</div>
+                    <div class="btn_add">ღ</div>
+                    <div class="btn_add">ෆ</div>
+                    <div class="btn_add">⁀</div>
+                    <div class="btn_add">➷</div>
+                    <div class="btn_add">➳</div>
+                    <div class="btn_add">✿</div>
+                    <div class="btn_add">❀</div>
+                    <div class="btn_add">™</div>
+                    <div class="btn_add">ʚ</div>
+                    <div class="btn_add">ɞ</div>
+                    <div class="btn_add">🩷</div>
+                    <div class="btn_add">🧡</div>
+                    <div class="btn_add">❤️</div>
+                    <div class="btn_add">💕</div>
+                    <div class="btn_add">💘</div>
+                    <div class="btn_add">⭐</div>
+                    <div class="btn_add">✨</div>
+                    <div class="btn_add">⚡</div>
+                </div>
+                <div class="btn_convert default_btn">글자 적용</div>
             </div>
-            <div class="btn_convert default_btn">글자 적용</div>
+            <div class="main_png_zone">
+                <div class="main_png_txt">
+                    <div class='ticker ticker_1'></div>
+                    <div class='ticker ticker_2'></div>
+                </div>
+            </div>
+            <div class="color_zone">
+                <input type='color' name='color3' id="id_color_3" value="#000000" />
+                <label for="id_color_3">배경 색상</label>
+                <input type='color' name='color4' id="id_color_4" value="#FFFFFF" />
+                <label for="id_color_4">선택 글자</label>
+                <input type='color' name='color5' id="id_color_5" value="#FFFFFF" />
+                <label for="id_color_5">전체 글자</label>
+            </div>
+            <div class="btns_zone">
+            </div>
+            <div class="submit_zone">
+                <div class="btn_submit default_btn">전광판만 보이기</div>
+            </div>
+            <div class="download_zone">
+                <div class="btn_download default_btn">GIF로 저장 (시간 오래 걸림)</div>
+            </div>
         </div>
-        <div class="main_png_zone">
+        <div class="final_zone" style="display:none">
             <div class="main_png_txt">
                 <div class='ticker ticker_1'></div>
                 <div class='ticker ticker_2'></div>
             </div>
-        </div>
-        <div class="color_zone">
-            <input type='color' name='color3' id="id_color_3" value="#000000" />
-            <label for="id_color_3">배경 색상</label>
-            <input type='color' name='color4' id="id_color_4" value="#FFFFFF" />
-            <label for="id_color_4">선택 글자</label>
-            <input type='color' name='color5' id="id_color_5" value="#FFFFFF" />
-            <label for="id_color_5">전체 글자</label>
-        </div>
-        <div class="btns_zone">
-        </div>
-        <div class="download_zone">
-            <div class="btn_download default_btn">저장</div>
-            <div class='txt_url'></div>
+            <div class="back_zone">
+                <div class="btn_back default_btn">돌아가기</div>
+            </div>
         </div>
     </div>
 
-</body>
-
-</html>
+</body></html>
 <script language="javascript">
     window.addEventListener('DOMContentLoaded', function () {
         setTimeout(setInit, 10);
