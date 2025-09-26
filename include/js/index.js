@@ -1,5 +1,5 @@
 // [변경] 스크롤 속도를 전역 상수로 정의하여 공유
-const PIXELS_PER_SECOND = 100; // 1초에 100픽셀 이동하는 속도
+const PIXELS_PER_SECOND = 30; // 1초에 100픽셀 이동하는 속도
 
 // 전역 변수들 (기존과 동일)
 let isRecording = false;
